@@ -18,7 +18,7 @@ void send_response(FILE *f, int address_found, char *ip_address) {
   if (!address_found) {
     fprintf(f, "{\"address\": \"UNKNOWN\"}");
   } else {
-    fprintf(f, "{\"address\": \"%s\"}", ip_address);
+    fprintf(f, "{\"your_address_is\": \"%s\"}", ip_address);
   }
 }
 
