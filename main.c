@@ -9,6 +9,7 @@
 #include <signal.h>
 
 #define MAX_LINE_LENGTH (1024)
+int port;
 
 void send_response(FILE *f, int address_found, char *ip_address) {
   fprintf(f, "HTTP/1.1 200 OK\r\n");
@@ -18,7 +19,7 @@ void send_response(FILE *f, int address_found, char *ip_address) {
   if (!address_found) {
     fprintf(f, "{\"address\": \"UNKNOWN\"}");
   } else {
-    fprintf(f, "{\"your_address_is\": \"%s\"}", ip_address);
+    fprintf(f, "{\"your_address_is\": \"%s\", \"port\": \"%d\"}", ip_address, port);
   }
 }
 
@@ -116,7 +117,6 @@ void accept_client(int sock) {
 }
 
 int main(int argc, char **argv) {
-  int port;
 
   if (argc != 2) {
     printf("%s [port-number]\n", argv[0]);
